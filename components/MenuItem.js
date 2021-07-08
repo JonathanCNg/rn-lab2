@@ -4,8 +4,8 @@ import { StyleSheet, Text, View, Button, Image, TextInput, Dimensions } from "re
 function MenuItem(props) {
   // Keep track of quantity
   const [quantity, setQuantity] = useState(0);
-  const [isSpecialInstructions, toggleSpecialInstructionTo] = useState(0);
-  const [specialInstructions, setSpecialInstructions] = useState(0);
+  const [isSpecialInstructions, toggleSpecialInstructionTo] = useState(false);
+  const [specialInstructions, setSpecialInstructions] = useState("");
   // TODO (part 3): add state for special instructions text
 
   // Return JSX to render
@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     width: "90%",
     padding: 30,
     margin: 20,
+    borderRadius: 30,
   },
   photoContainer: {
     padding: 5,
