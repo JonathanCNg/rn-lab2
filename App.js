@@ -10,12 +10,13 @@ export default function App() {
         <View style={{borderBottomColor: 'black', borderBottomWidth: 3, width: '100%'}}>
           <Text style={{ fontSize: 20, padding: 10, alignSelf: 'center', fontFamily: 'Rockwell' }}>SNAP EATING ACCOUNT</Text>
         </View>
-        <ScrollView style={{width: '100%', backgroundColor: '#e4fcfc'}}>
-          <View style={{width: '70%', alignSelf: 'center'}}>
+        <ScrollView style={{width: '100%', backgroundColor: '#e4fcfc'}} alignItems={'center'}>
+          <View style={{width: '70%'}}>
             {/* TODO (part 1): update these props with your favorite food item */}
-            <MenuItem name={'Cookies (5)'} price={100} imageSource={{uri: 'https://image.freepik.com/free-photo/chocolate-chip-cookies-white-background_146936-712.jpg'}} />
-            <MenuItem name={'Milk (Liter)'} price={250} imageSource={{uri: 'https://img1.cgtrader.com/items/717115/a69ed5d165/milk-carton-3d-model-obj-mtl-fbx-blend.png'}} />
-            <MenuItem name={'Lactase (32)'} price={250} imageSource={{uri: 'https://www.kroger.com/product/images/large/front/0030045091032'}} />
+            <MenuItem name={'Cookies (5)'} price={4.99} imageSource={{uri: 'https://image.freepik.com/free-photo/chocolate-chip-cookies-white-background_146936-712.jpg'}} />
+            <MenuItem name={'Milk (Liter)'} price={3.47} imageSource={{uri: 'https://img1.cgtrader.com/items/717115/a69ed5d165/milk-carton-3d-model-obj-mtl-fbx-blend.png'}} />
+            <MenuItem name={'Lactase (32)'} price={12.49} imageSource={{uri: 'https://www.kroger.com/product/images/large/front/0030045091032'}} />
+            <View style={{padding:10}}></View>
           </View>
         </ScrollView>
         {/* TODO (part 2): add another MenuItem! */}

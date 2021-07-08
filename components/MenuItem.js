@@ -4,8 +4,8 @@ import { StyleSheet, Text, View, Button, Image, TextInput, Dimensions } from "re
 function MenuItem(props) {
   // Keep track of quantity
   const [quantity, setQuantity] = useState(0);
-  const [isSpecialInstructions, toggleSpecialInstructionTo] = useState(false);
-  const [specialInstructions, setSpecialInstructions] = useState("");
+  // const [isSpecialInstructions, toggleSpecialInstructionTo] = useState(false);
+  // const [specialInstructions, setSpecialInstructions] = useState("");
   // TODO (part 3): add state for special instructions text
 
   // Return JSX to render
@@ -40,7 +40,8 @@ function MenuItem(props) {
         />
       </View>
       <Text style={styles.detail}>Total Cost: ${props.price*quantity}</Text>
-      <Text style={{paddingTop: 20}}>Special Instructions: {isSpecialInstructions ? specialInstructions : null}</Text>
+      <Text style={{paddingTop: 20}}>Special Instructions:</Text>
+      {/* <Text style={{height:20}}>{isSpecialInstructions ? specialInstructions : ""}</Text> */}
       <TextInput style={styles.detail}
         useRef={input => {this.textInput = input}}
         // clearButtonMode="always"
@@ -49,9 +50,9 @@ function MenuItem(props) {
         onSubmitEditing={({ nativeEvent, currentTarget }) => {
           console.log(nativeEvent.text);
           // TODO (part 3): Update special instructions text
-          toggleSpecialInstructionTo(true);
-          setSpecialInstructions(nativeEvent.text)
-          currentTarget.clear();
+          // toggleSpecialInstructionTo(true);
+          // setSpecialInstructions(nativeEvent.text)
+          // currentTarget.clear();
         }}
       />
     </View>
@@ -71,6 +72,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     width: "90%",
     padding: 30,
+    paddingLeft: 50,
+    paddingRight: 50,
     margin: 20,
     borderRadius: 30,
   },
