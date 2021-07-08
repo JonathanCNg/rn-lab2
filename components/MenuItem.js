@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, Image, TextInput } from "react-native";
+import { StyleSheet, Text, View, Button, Image, TextInput, Dimensions } from "react-native";
 
 function MenuItem(props) {
   // Keep track of quantity
   const [quantity, setQuantity] = useState(0);
+  const [isSpecialInstructions, toggleSpecialInstructionTo] = useState(0);
+  const [specialInstructions, setSpecialInstructions] = useState(0);
   // TODO (part 3): add state for special instructions text
 
   // Return JSX to render
@@ -11,20 +13,21 @@ function MenuItem(props) {
     <View style={styles.container}>
       <View style={styles.photoContainer}>
         <Image
-          source={require("../assets/placeholder-image.png")}
+          source={props.imageSource}
           style={styles.photo}
         />
       </View>
-      <Text style={{ fontWeight: "bold" }}>{"FOOD NAME"}</Text>
-      <Text>Price: ${1000}</Text>
-      <Text>Quantity: {quantity}</Text>
+      <Text style={{ fontWeight: "bold" }}>{props.name}</Text>
+      <Text style={styles.detail}>Price: ${props.price}</Text>
+      <Text style={styles.detail}>Quantity: {quantity}</Text>
       <View style={styles.buttonsContainer}>
-        <Button
+        <Button disabled={(quantity == 0)}
           title="-"
           onPress={() => {
             console.log("minus pressed");
             // TODO (part 2): decrease quantity by 1
             // watch out for negative quantity
+              setQuantity(quantity-1)
           }}
         />
         <Button
@@ -32,16 +35,23 @@ function MenuItem(props) {
           onPress={() => {
             console.log("plus pressed");
             // TODO (part 2): increase quantity by 1
+            setQuantity(quantity+1)
           }}
         />
       </View>
-      <Text>Special Instructions: {null}</Text>
-      <TextInput
+      <Text style={styles.detail}>Total Cost: ${props.price*quantity}</Text>
+      <Text style={{paddingTop: 20}}>Special Instructions: {isSpecialInstructions ? specialInstructions : null}</Text>
+      <TextInput style={styles.detail}
+        useRef={input => {this.textInput = input}}
+        // clearButtonMode="always"
+        textAlign={'left'}
         placeholder="Type instructions here"
-        onSubmitEditing={({ nativeEvent }) => {
+        onSubmitEditing={({ nativeEvent, currentTarget }) => {
           console.log(nativeEvent.text);
           // TODO (part 3): Update special instructions text
-          nativeEvent.target.clear();
+          toggleSpecialInstructionTo(true);
+          setSpecialInstructions(nativeEvent.text)
+          currentTarget.clear();
         }}
       />
     </View>
@@ -51,14 +61,14 @@ function MenuItem(props) {
 const styles = StyleSheet.create({
   container: {
     display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    rowGap: "10px",
+    flexDirection: "column",
+    // flexWrap: "wrap",
+    // rowGap: 10,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "space-between",
     borderStyle: "solid",
-    borderWidth: "2px",
+    borderWidth: 2,
     width: "90%",
     padding: 30,
     margin: 20,
@@ -67,8 +77,9 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   photo: {
-    resizeMode: "contain",
+    resizeMode: "cover",
     width: "75%",
+    // aspectRatio: 1,
     padding: 50,
   },
   buttonsContainer: {
@@ -77,6 +88,9 @@ const styles = StyleSheet.create({
     width: 100,
     justifyContent: "space-around",
   },
+  detail: {
+    paddingTop: 5,
+  }
 });
 
 export default MenuItem;
