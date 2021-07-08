@@ -4,11 +4,12 @@ import { StyleSheet, Text, View, Button, Image, TextInput, Dimensions } from "re
 function MenuItem(props) {
   // Keep track of quantity
   const [quantity, setQuantity] = useState(0);
+  const [isMaxQuantity, setIsMaxQuantity] = useState(quantity >= props.maxQuantity);
   // const [isSpecialInstructions, toggleSpecialInstructionTo] = useState(false);
   // const [specialInstructions, setSpecialInstructions] = useState("");
   // TODO (part 3): add state for special instructions text
-
   // Return JSX to render
+
   return (
     <View style={styles.container}>
       <View style={styles.photoContainer}>
@@ -19,9 +20,10 @@ function MenuItem(props) {
       </View>
       <Text style={{ fontWeight: "bold" }}>{props.name}</Text>
       <Text style={styles.detail}>Price: ${props.price}</Text>
-      <Text style={styles.detail}>Quantity: {quantity}</Text>
+      <Text style={{color: (quantity >= props.maxQuantity) ? 'red' : "black"}}>Quantity: {quantity} {(quantity >= props.maxQuantity) ? "(Max)" : ""}</Text>
       <View style={styles.buttonsContainer}>
-        <Button disabled={(quantity == 0)}
+        <Button 
+          disabled={(quantity == 0)}
           title="-"
           onPress={() => {
             console.log("minus pressed");
@@ -31,6 +33,7 @@ function MenuItem(props) {
           }}
         />
         <Button
+          disabled={(quantity >= props.maxQuantity)}
           title="+"
           onPress={() => {
             console.log("plus pressed");
@@ -39,7 +42,7 @@ function MenuItem(props) {
           }}
         />
       </View>
-      <Text style={styles.detail}>Total Cost: ${props.price*quantity}</Text>
+      <Text style={styles.detail}>Total Cost: ${(props.price*quantity).toFixed(2)}</Text>
       <Text style={{paddingTop: 20}}>Special Instructions:</Text>
       {/* <Text style={{height:20}}>{isSpecialInstructions ? specialInstructions : ""}</Text> */}
       <TextInput style={styles.detail}
